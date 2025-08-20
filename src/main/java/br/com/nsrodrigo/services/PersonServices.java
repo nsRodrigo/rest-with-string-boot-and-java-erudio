@@ -29,14 +29,6 @@ public class PersonServices {
         logger.info("Finding one Person!");
 
         return repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID!"));
-
-//        Person person = new Person();
-//        person.setId(counter.incrementAndGet());
-//        person.setFirstName("Nataly");
-//        person.setLastName("Oliveira");
-//        person.setAddress("Osasco - São Paulo - Brasil");
-//        person.setGender("Mulher");
-//        return person;
     }
 
     public Person create(Person person){
@@ -61,14 +53,4 @@ public class PersonServices {
         Person entity = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID!"));
         repository.delete(entity);
     }
-
-//    private Person mockPerson(int i) {
-//        Person person = new Person();
-//        person.setId(counter.incrementAndGet());
-//        person.setFirstName("Firstname" + i);
-//        person.setLastName("Lastname" + i);
-//        person.setAddress("Some Address in Brasil");
-//        person.setGender("Mulher");
-//        return person;
-//    }
 }
