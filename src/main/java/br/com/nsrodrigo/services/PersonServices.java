@@ -5,6 +5,7 @@ import br.com.nsrodrigo.model.Person;
 import br.com.nsrodrigo.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -28,17 +29,17 @@ public class PersonServices {
     public Person findById(Long id){
         logger.info("Finding one Person!");
 
-        return repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID!"));
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
     }
 
-    public Person create(Person person){
-        logger.info("Creating one Person!");
-        return repository.save(person);
+    public List<Person> create(List<Person> person) {
+        logger.info("Creating a list of Persons!");
+        return repository.saveAll(person);
     }
 
     public Person update(Person person){
         logger.info("Updating one Person!");
-        Person entity = repository.findById(person.getId()).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID!"));
+        Person entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
@@ -50,7 +51,7 @@ public class PersonServices {
 
     public void delete(Long id){
         logger.info("Deleting one Person!");
-        Person entity = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No records found for this ID!"));
+        Person entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
         repository.delete(entity);
     }
 }
