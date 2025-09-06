@@ -1,4 +1,4 @@
-package br.com.nsrodrigo.data.dto.v1;
+package br.com.nsrodrigo.data.dto;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,12 +1,11 @@
 package br.com.nsrodrigo.services;
 
-import br.com.nsrodrigo.data.dto.v1.PersonDTO;
-import br.com.nsrodrigo.data.dto.v2.PersonDTOV2;
+import br.com.nsrodrigo.data.dto.PersonDTO;
+
 import br.com.nsrodrigo.exception.ResourceNotFoundException;
 import static br.com.nsrodrigo.mapper.ObjectMapper.parseListObjects;
 import static br.com.nsrodrigo.mapper.ObjectMapper.parseObject;
 
-import br.com.nsrodrigo.mapper.custom.PersonMapper;
 import br.com.nsrodrigo.model.Person;
 import br.com.nsrodrigo.repository.PersonRepository;
 import org.slf4j.Logger;
@@ -26,8 +25,6 @@ public class PersonServices {
     @Autowired
     PersonRepository repository;
 
-    @Autowired
-    PersonMapper converter;
 
     public List<PersonDTO> findAll() {
         logger.info("Finding all People!");
@@ -44,12 +41,6 @@ public class PersonServices {
         logger.info("Creating one Person!");
         var entity = parseObject(person, Person.class);
         return parseObject(repository.save(entity), PersonDTO.class);
-    }
-
-    public PersonDTOV2 createV2(PersonDTOV2 person) {
-        logger.info("Creating one Person - V2!");
-        var entity = converter.convertDTOToEntity(person);
-        return converter.convertEntityToDTO(repository.save(entity));
     }
 
     public PersonDTO update(PersonDTO person) {
